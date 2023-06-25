@@ -1,12 +1,12 @@
 <!-- Add Modal -->
-<div wire:ignore.self class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="content-mod">
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Category User</h1>
             <button type="button" class="btn-close" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form wire:submit.prevent="storeUser">
+        <form wire:submit.prevent="storeCategory">
             <div class="modal-body">
                 <div class="mb-3">
                     <label>Name</label>
@@ -16,27 +16,9 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label>Email</label>
-                    <input type="email" wire:model.defer="email" class="form-control" required>
-                    @error('email')
-                        <small class="text-danger">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label>Password</label>
-                    <input type="password" wire:model.defer="password" class="form-control" required>
-                    @error('password')
-                        <small class="text-danger">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label>Role</label>
-                    <select wire:model.defer="role_as" class="form-control" required>
-                        <option>Select Role</option>
-                        <option value="1">Admin</option>
-                        <option value="0">User</option>
-                    </select>
-                    @error('role')
+                    <label>Status</label><br/>
+                    <input type="checkbox" wire:model.defer="status"> checked=hidden, unchecked=visible
+                    @error('status')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
@@ -51,11 +33,11 @@
 </div>
 
 <!-- Update Modal -->
-<div wire:ignore.self class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="content-mod">
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Update User</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category</h1>
             <button type="button" class="btn-close" wire:click="closeModal"  data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div wire:loading class="p-2">
@@ -64,7 +46,7 @@
             </div> Loading....
         </div>
         <div wire:loading.remove>
-            <form wire:submit.prevent="updateUser">
+            <form wire:submit.prevent="updateCategory">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label>Name</label>
@@ -74,27 +56,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" wire:model.defer="email" class="form-control">
-                        @error('email')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input type="password" wire:model.defer="password" class="form-control">
-                        @error('password')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label>Role</label>
-                        <select wire:model.defer="role_as" class="form-control">
-                            <option value="">Select Role</option>
-                            <option value="1" {{$role_as == '1' ? 'selected':'' }}>Admin</option>
-                            <option value="0" {{$role_as == '0' ? 'selected':'' }}>User</option>
-                        </select>
-                        @error('role')
+                        <label>Status</label><br/>
+                        <input type="checkbox" wire:model.defer="status"> checked=hidden, unchecked=visible
+                        @error('status')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                     </div>
@@ -110,7 +74,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div wire:ignore.self class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="content-mod">
         <div class="modal-header">
@@ -123,7 +87,7 @@
             </div> Loading....
         </div>
         <div wire:loading.remove>
-            <form wire:submit.prevent="destroyUser">
+            <form wire:submit.prevent="destroyCategory">
                 <div class="modal-body">
                     <h6>Are you sure you want to delete this data?</h6>
                 </div>

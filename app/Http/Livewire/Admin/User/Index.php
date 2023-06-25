@@ -71,47 +71,70 @@ class Index extends Component
                 } else {
                     $validatedData = $this->validate();
                     if ($user->role_as != '1') {
-                        $user->update([
-                            'name' => $this->name,
-                            'email' => $this->email,
-                            'password' => Hash::make($this->password),
-                            'role_as' => $this->role_as
-                        ]);
+                        if ($this->password == $user->password) {
+                            $user->update([
+                                'name' => $this->name,
+                                'email' => $this->email,
+                                'role_as' => $this->role_as
+                            ]);
+                        } else {
+                            $user->update([
+                                'name' => $this->name,
+                                'email' => $this->email,
+                                'password' => Hash::make($this->password),
+                                'role_as' => $this->role_as,
+                            ]);
+                        }
                         $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     } else {
-                        $user->update([
-                            'name' => $this->name,
-                            'email' => $this->email,
-                            'password' => Hash::make($this->password),
-                            'role_as' => $this->role_as
-                        ]);
+                        if ($this->password == $user->password) {
+                            $user->update([
+                                'name' => $this->name,
+                                'email' => $this->email
+                            ]);
+                        } else {
+                            $user->update([
+                                'name' => $this->name,
+                                'email' => $this->email,
+                                'password' => Hash::make($this->password),
+                            ]);
+                        }
                         $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     }
                 }
-                $this->dispatchBrowserEvent('close-modal');
-                $this->resetInput();
             }else{
                 if ($user->role_as != '1') {
-                    $user->update([
-                        'name' => $this->name,
-                        'password' => Hash::make($this->password),
-                        'role_as' => $this->role_as
-                    ]);
+                    if ($this->password == $user->password) {
+                        $user->update([
+                            'name' => $this->name,
+                            'role_as' => $this->role_as
+                        ]);
+                    } else {
+                        $user->update([
+                            'name' => $this->name,
+                            'password' => Hash::make($this->password),
+                            'role_as' => $this->role_as,
+                        ]);
+                    }
                 } else {
-                    $user->update([
-                        'name' => $this->name,
-                        'password' => Hash::make($this->password)
-                    ]);
+                    if ($this->password == $user->password) {
+                        $user->update([
+                            'name' => $this->name
+                        ]);
+                    } else {
+                        $user->update([
+                            'name' => $this->name,
+                            'password' => Hash::make($this->password),
+                        ]);
+                    }
                 }
-                $this->dispatchBrowserEvent('close-modal');
-                $this->resetInput();
                 $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
             }
         }else{
-            $this->dispatchBrowserEvent('close-modal');
-            $this->resetInput();
             $this->dispatchBrowserEvent('error', ['message' => 'User does not exist']);
         }
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInput();
     }
     public function deleteUser($user_id)
     {
@@ -127,17 +150,15 @@ class Index extends Component
                 $user->delete();
                 $this->dispatchBrowserEvent('success', ['message' => 'User Deleted Successfully']);
             }
-            $this->dispatchBrowserEvent('close-modal');
-            $this->resetInput();
         } else {
-            $this->dispatchBrowserEvent('close-modal');
-            $this->resetInput();
             $this->dispatchBrowserEvent('error', ['message' => 'User Already Deleted']);
-        }   
+        } 
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInput();
     }
     public function render()
     {
-        $users = User::orderby('user_id', 'ASC')->paginate(5);
+        $users = User::orderby('user_id', 'DESC')->paginate(5);
         return view('livewire.admin.user.index', compact('users'))
                 ->extends('layouts.admin')
                 ->section('content');

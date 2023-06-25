@@ -34,5 +34,5 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
     Route::get('users', App\Http\Livewire\Admin\User\Index::class);
-
+    Route::get('categories', App\Http\Livewire\Admin\Category\Index::class);
 });

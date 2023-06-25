@@ -13,7 +13,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{url('admin/categories')}}">
         <i class="mdi mdi-view-list menu-icon"></i>
         <span class="menu-title">Category</span>
       </a>
