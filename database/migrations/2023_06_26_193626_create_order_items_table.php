@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_images', function (Blueprint $table) {
-            $table->increments('book_image_id');
-            $table->integer('book_id')->unsigned();
-            $table->string('url'); //uploads/book_images/bookid/images.extension
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->increments('order_item_id');
+            $table->integer('order_id')->unsigned();
+            $table->integer('quantity');
+            $table->integer('price');
             $table->timestamps();
 
-            $table->foreign('book_id')->references('book_id')->on('books')->onDelete('cascade');
+            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_images');
+        Schema::dropIfExists('order_items');
     }
 };

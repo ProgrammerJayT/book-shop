@@ -13,19 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->increments('book_id');
+        Schema::create('cart_items', function (Blueprint $table) {
+            $table->increments('cart_item_id');
             $table->integer('user_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            $table->string('name');
-            $table->longText('description');
-            $table->string('author');
-            $table->string('edition');
-            $table->tinyInteger('status')->comment('0=pending, 1=approved');
+            $table->integer('book_id')->unsigned();
+            $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
+            $table->foreign('book_id')->references('book_id')->on('books')->onDelete('cascade');
         });
     }
 
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('cart_items');
     }
 };
