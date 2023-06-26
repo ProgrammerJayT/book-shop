@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('book_images', function (Blueprint $table) {
             $table->integer('book_image_id')->autoIncrement();
-            $table->integer('book_id'); //Foreign key
-            $table->string('url');
+            $table->integer('book_id'); // Foreign key
+            $table->string('url'); // public/book-images/bookId/image.extension
             $table->timestamps();
         });
     }
