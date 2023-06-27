@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('order_id');
             $table->integer('user_id')->unsigned();
+            $table->mediumText('address')->nullable();
+            $table->string('zip_code')->nullable();
             $table->string('status')->comment('paid,collected');
             $table->timestamps();
 
