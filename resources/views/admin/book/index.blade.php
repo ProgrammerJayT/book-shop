@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>Books List
-                    <a href="" class="btn btn-sm btn-secondary float-end">Add Book</a>
+                    <a href="{{url('admin/books/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
                 </h4>
             </div>
             <div class="card-body" id="card-body">
@@ -28,6 +28,10 @@
                         {{-- @forelse ($collection as $item) --}}
                         <tr>
                             <td></td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary btn-txt">Edit</a>
+                                <a href="" class="btn btn-sm btn-danger btn-txt">Delete</a>
+                            </td>
                         </tr>
                         {{-- @empty --}}
                         <tr>
