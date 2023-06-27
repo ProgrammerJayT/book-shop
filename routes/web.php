@@ -35,4 +35,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
 
     Route::get('users', App\Http\Livewire\Admin\User\Index::class);
     Route::get('categories', App\Http\Livewire\Admin\Category\Index::class);
+    Route::controller(App\Http\Controllers\Admin\BookController::class)->group(function() {
+        Route::get('books', 'index');
+    });
 });

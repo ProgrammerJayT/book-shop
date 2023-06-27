@@ -32,7 +32,7 @@
       </a>
       <div class="collapse" id="ui-product">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">All Books</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('admin/books')}}">All Books</a></li>
         </ul>
       </div>
     </li>

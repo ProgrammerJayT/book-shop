@@ -31,7 +31,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">No Categories Found....</td>
+                                <td colspan="4" class="text-center">No Categories Found....</td>
                             </tr>
                             @endforelse
                         </tbody>
