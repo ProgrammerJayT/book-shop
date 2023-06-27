@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    protected $primaryKey = 'book_id';
 }
