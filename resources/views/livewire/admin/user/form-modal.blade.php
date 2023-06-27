@@ -10,21 +10,21 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label>Name</label>
-                    <input type="text" wire:model.defer="name" class="form-control" required>
+                    <input type="text" wire:model.defer="name" placeholder="name" class="form-control" required>
                     @error('name')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label>Email</label>
-                    <input type="email" wire:model.defer="email" class="form-control" required>
+                    <input type="email" wire:model.defer="email" placeholder="email" class="form-control" required>
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label>Password</label>
-                    <input type="password" wire:model.defer="password" class="form-control" required>
+                    <input type="password" wire:model.defer="password" placeholder="password" class="form-control" required>
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror

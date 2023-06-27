@@ -31,12 +31,13 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
-    Route::get('users', App\Http\Livewire\Admin\User\Index::class);
-    Route::get('categories', App\Http\Livewire\Admin\Category\Index::class);
+    Route::get('/users', App\Http\Livewire\Admin\User\Index::class);
+    Route::get('/categories', App\Http\Livewire\Admin\Category\Index::class);
     Route::controller(App\Http\Controllers\Admin\BookController::class)->group(function() {
-        Route::get('books', 'index');
-        Route::get('books/create', 'create');
+        Route::get('/books', 'index');
+        Route::get('/books/create', 'create');
+        Route::post('/books', 'store');
     });
 });

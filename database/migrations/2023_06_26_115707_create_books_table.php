@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('author');
             $table->string('edition');
+            $table->integer('price');
             $table->tinyInteger('status')->default('0')->comment('0=pending, 1=approved');
             $table->timestamps();
 

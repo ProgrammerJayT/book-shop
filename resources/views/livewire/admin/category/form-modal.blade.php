@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label>Name</label>
-                    <input type="text" wire:model.defer="name" class="form-control" required>
+                    <input type="text" wire:model.defer="name" placeholder="name" class="form-control" required>
                     @error('name')
                         <small class="text-danger">{{$message}}</small>
                     @enderror

@@ -3,6 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @if (session('message'))
+            <div class="alert alert-success">{{session('message')}}</div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h4>Books List
@@ -20,6 +23,7 @@
                             <th>Edition</th>
                             <th>Author</th>
                             <th>Added By</th>
+                            <th>Email</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -35,7 +39,7 @@
                         </tr>
                         {{-- @empty --}}
                         <tr>
-                            <td colspan="9" class="text-center">No Books Found...</td>
+                            <td colspan="10" class="text-center">No Books Found...</td>
                         </tr>
                         {{-- @endforelse --}}
                     </tbody>
