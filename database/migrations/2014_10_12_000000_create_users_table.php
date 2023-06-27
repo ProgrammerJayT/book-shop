@@ -21,7 +21,7 @@ return new class extends Migration
             $table->mediumText('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('url'); //uploads/users/userName/image.extension
+            $table->string('url')->nullable(); //uploads/users/userName/image.extension
             $table->string('password');
             $table->tinyInteger('role_as')->default('0')->comment('0=User, 1=Admin');
             $table->rememberToken();
