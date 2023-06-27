@@ -25,10 +25,16 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" data-bs-toggle="collapse" href="#ui-product" aria-expanded="false" aria-controls="ui-product">
         <i class="mdi mdi-book-multiple menu-icon"></i>
         <span class="menu-title">Books</span>
+        <i class="menu-arrow"></i>
       </a>
+      <div class="collapse" id="ui-product">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="">All Books</a></li>
+        </ul>
+      </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="">
