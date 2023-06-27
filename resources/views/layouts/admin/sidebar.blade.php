@@ -13,6 +13,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="mdi mdi-information menu-icon"></i>
+        <span class="menu-title">Sales</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="{{url('admin/categories')}}">
         <i class="mdi mdi-view-list menu-icon"></i>
         <span class="menu-title">Category</span>
@@ -28,12 +34,6 @@
       <a class="nav-link" href="">
         <i class="mdi mdi-car menu-icon"></i>
         <span class="menu-title">Orders</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <i class="mdi mdi-information menu-icon"></i>
-        <span class="menu-title">Invoices</span>
       </a>
     </li>
     <li class="nav-item">
