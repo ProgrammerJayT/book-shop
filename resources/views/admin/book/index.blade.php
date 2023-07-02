@@ -19,9 +19,9 @@
                             <th>No</th>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Edition</th>
                             <th>Author</th>
+                            <th>Price</th>
                             <th>Added By</th>
                             <th>Email</th>
                             <th>Status</th>
@@ -29,19 +29,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse ($collection as $item) --}}
+                        @forelse ($books as $key=>$book)
                         <tr>
-                            <td></td>
+                            <td>{{$key+1}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary btn-txt">Edit</a>
-                                <a href="" class="btn btn-sm btn-danger btn-txt">Delete</a>
+                            @if ($book->category)     
+                                {{$book->category->name}}
+                            @else
+                                No category
+                            @endif
+                            </td>
+                            <td>{{$book->name}}</td>
+                            <td>{{$book->edition}}</td>
+                            <td>{{$book->author}}</td>
+                            <td>{{$book->price}}</td>
+                            <td>
+                            @if ($book->user)
+                                {{$book->user->name}}
+                            @else
+                                No user
+                            @endif
+                            </td>
+                            <td>
+                            @if ($book->user)
+                                {{$book->user->email}}
+                            @else
+                                No user
+                            @endif
+                            </td>
+                            <td>{{$book->status == 1 ? 'Approved':'Pending'}}</td>
+                            <td>
+                                <a href="{{url('admin/books/'.$book->book_id.'/edit')}}" class="btn btn-sm btn-primary btn-txt">Edit</a>
+                                <a href="{{url('admin/books/'.$book->book_id.'/delete')}}" onclick="return confirm('Are you sure, you want to delete this data?')" class="btn btn-sm btn-danger btn-txt">Delete</a>
                             </td>
                         </tr>
-                        {{-- @empty --}}
+                        @empty
                         <tr>
                             <td colspan="10" class="text-center">No Books Found...</td>
                         </tr>
-                        {{-- @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -32,12 +32,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-
+    Route::controller(App\Http\Controllers\Admin\SiteController::class)->group(function() {
+        Route::get('/sites', 'index');
+        Route::get('/sites/create', 'create');
+        Route::post('/sites', 'store');
+        Route::get('/sites/{site}/edit', 'edit');
+        Route::put('/sites/{site}', 'update');
+        Route::get('/sites/{site}/delete', 'destroy');
+    });
     Route::get('/users', App\Http\Livewire\Admin\User\Index::class);
     Route::get('/categories', App\Http\Livewire\Admin\Category\Index::class);
     Route::controller(App\Http\Controllers\Admin\BookController::class)->group(function() {
         Route::get('/books', 'index');
         Route::get('/books/create', 'create');
         Route::post('/books', 'store');
+        Route::get('/books/{book}/edit', 'edit');
+        Route::put('/books/{book}', 'update');
+        Route::get('/books/{book_id}/delete', 'destroy');
+        Route::get('/book-image/{book_image_id}/delete', 'destroyImage');
     });
 });
