@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('index');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -27,6 +27,8 @@ Route::get('/register', function() {
 })->name('register');
 
 Auth::routes();
+
+Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

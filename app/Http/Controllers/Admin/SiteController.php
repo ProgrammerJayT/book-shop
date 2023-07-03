@@ -106,7 +106,7 @@ class SiteController extends Controller
             );
         } else {
             $notification = array(
-                'message' => 'something went wrong'
+                'message' => 'Something Went Wrong'
             );
         }
         return redirect('admin/sites')->with($notification);
