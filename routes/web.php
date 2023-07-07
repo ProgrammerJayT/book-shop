@@ -29,6 +29,7 @@ Route::get('/register', function() {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
+Route::get('/category/{category}', [App\Http\Controllers\Frontend\FrontendController::class, 'category']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -74,16 +74,28 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0" >
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{{url('/')}}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @forelse ($categories as $category)
+                                <li><a class="dropdown-item" href="{{url('category/'.$category->category_id)}}">{{$category->name}}</a></li>
+                            @empty
+                                <li><a class="dropdown-item" href="">No Category</a></li>
+                            @endforelse
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">New Arrivals</a>
+                        <a class="nav-link" href="{{url('/new-arrivals')}}">New Arrivals</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Featured Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sell Book</a>
                     </li>
                 </ul>
             </div>

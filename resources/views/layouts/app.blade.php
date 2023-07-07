@@ -31,6 +31,8 @@
         <main class="py-1">
             @yield('content')
         </main>
+
+        @include('layouts.frontend.footer')
     </div>
     
     <!-- Scripts -->
@@ -42,23 +44,24 @@
     <script src="{{asset('backend2/vendors/sweetalert/sweetalert.min.js')}}"></script>
 
     <script>
-        @if (Session::has('status'))
-            var type = "{{Session::get('alert-type','info')}}";
-            switch (type) {
-            case 'info':
-                toastr.info("{{Session::get('status')}}");
-                break;
-            case 'success':
-                toastr.success("{{Session::get('status')}}");
-            break;
-            case 'warning':
-                toastr.warning("{{Session::get('status')}}");
-            break;
-            case 'error':
-                toastr.error("{{Session::get('status')}}");
-            break;      
-            }
-        @endif
+        $(document).ready(function(){
+        toastr.options = {
+            'positionClass' : 'toast-top-right'
+        };
+        window.addEventListener('success', event => {
+            toastr.success(event.detail.message);
+        });
+        window.addEventListener('warning', event => {
+            toastr.warning(event.detail.message);
+        });
+        window.addEventListener('error', event => {
+            toastr.error(event.detail.message);
+        });
+        window.addEventListener('info', event => {
+            toastr.info(event.detail.message);
+        });
+        });
+
     </script>
 
     @livewireScripts
