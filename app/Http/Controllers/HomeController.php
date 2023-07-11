@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $sliders = SiteSetting::where('status', '0')->get();
         $categories = Category::where('status', '0')->get();
-
-        return view('home', compact('categories'));
+        return view('home', compact('categories', 'sliders'));
     }
 }

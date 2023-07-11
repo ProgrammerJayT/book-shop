@@ -19,6 +19,8 @@ return new class extends Migration
             $table->mediumText('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('status')->comment('paid,collected');
+            $table->string('payment_mode');
+            $table->string('payment_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

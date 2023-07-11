@@ -29,4 +29,10 @@ class FrontendController extends Controller
         }
     }
 
+    public function thankyou()
+    {
+        $categories = Category::where('status', '0')->get();
+        return view('frontend.thank-you', compact('categories'));
+    }
+
 }

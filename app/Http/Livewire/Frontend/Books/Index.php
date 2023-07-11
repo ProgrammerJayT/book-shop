@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontend\Books;
 
 use App\Models\Book;
 use Livewire\Component;
+use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -20,7 +21,21 @@ class Index extends Component
             if ($this->books->where('book_id', $bookId)->where('status', '0')) {
                 $book = $this->books->where('book_id', $bookId)->first();
                 if ($this->books->where('name', $book->name)->count() > 0) {
-                    # code...
+                    if (CartItem::where('user_id', auth()->user()->user_id)->where('book_id', $bookId)->exists()) {
+                        $this->dispatchBrowserEvent('error',[
+                            'message' => 'Book Already Added to Cart'
+                        ]);
+                    } else {
+                        CartItem::create([
+                            'user_id' => auth()->user()->user_id,
+                            'book_id' => $bookId,
+                            'quantity' => '1',
+                        ]);
+                        $this->emit('CartAddedUpdated');
+                        $this->dispatchBrowserEvent('success', [
+                            'message' => 'Book Added to Cart',
+                        ]);
+                    }
                 } else {
                     $this->dispatchBrowserEvent('warning', [
                         'message' => 'Only '.$this->books->where('name', $book->name)->count().' book(s) available',

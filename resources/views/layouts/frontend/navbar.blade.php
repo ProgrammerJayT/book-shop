@@ -19,8 +19,8 @@
                     <ul class="nav justify-content-end">
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-shopping-cart"></i> Cart (0)
+                            <a class="nav-link" href="{{url('cart')}}">
+                                <i class="fa fa-shopping-cart"></i> Cart (<livewire:frontend.cart.cart-count />)
                             </a>
                         </li>
                         @guest
@@ -42,8 +42,8 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                                    <li><a class="dropdown-item" href="{{url('orders')}}"><i class="fa fa-list"></i> My Orders</a></li>
+                                    <li><a class="dropdown-item" href="{{url('cart')}}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -92,10 +92,10 @@
                         <a class="nav-link" href="{{url('/new-arrivals')}}">New Arrivals</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Featured Books</a>
+                        <a class="nav-link" href="{{url('/featured-book')}}">Featured Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sell Book</a>
+                        <a class="nav-link" href="{{url('/sell-book')}}">Sell Book</a>
                     </li>
                 </ul>
             </div>

@@ -31,8 +31,6 @@
         <main class="py-1">
             @yield('content')
         </main>
-
-        @include('layouts.frontend.footer')
     </div>
     
     <!-- Scripts -->
@@ -65,6 +63,5 @@
     </script>
 
     @livewireScripts
-    @stack('scripts')
 </body>
 </html>

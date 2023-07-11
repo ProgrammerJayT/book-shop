@@ -23,7 +23,7 @@
                     @endforeach
                     <div class="mb-2"><a href="" class="text-white">New Arrivals Books</a></div>
                     <div class="mb-2"><a href="" class="text-white">Featured Books</a></div>
-                    <div class="mb-2"><a href="" class="text-white">Cart</a></div>
+                    <div class="mb-2"><a href="{{url('cart')}}" class="text-white">Cart</a></div>
                 </div>
                 <div class="col-md-3">
                     <h4 class="footer-heading">Reach Us</h4>

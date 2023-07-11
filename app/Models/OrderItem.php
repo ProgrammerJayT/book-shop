@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OrderItem extends Model
 {
@@ -12,4 +13,9 @@ class OrderItem extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'order_item_id';
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id');
+    }
 }

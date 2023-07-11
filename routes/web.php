@@ -30,6 +30,13 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
 Route::get('/category/{category}', [App\Http\Controllers\Frontend\FrontendController::class, 'category']);
+Route::middleware(['auth'])->group(function() {
+    Route::get('/cart', [App\Http\Controllers\Frontend\CartContoller::class, 'index']);
+    Route::get('/checkout', [App\Http\Controllers\Frontend\CheckoutContoller::class, 'index']);
+    Route::get('/orders', [App\Http\Controllers\Frontend\OrderController::class, 'index']);
+    Route::get('/orders/{orderId}', [App\Http\Controllers\Frontend\OrderController::class, 'show']);
+}); 
+Route::get('/thank-you', [App\Http\Controllers\Frontend\FrontendController::class, 'thankyou']);  
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -53,5 +60,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
         Route::put('/books/{book}', 'update');
         Route::get('/books/{book_id}/delete', 'destroy');
         Route::get('/book-image/{book_image_id}/delete', 'destroyImage');
+    });
+    Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function() {
+        Route::get('/orders', 'index');
+        Route::get('/orders/{orderId}', 'show');
+        Route::put('/orders/{orderId}', 'updateOrderStatus');
     });
 });

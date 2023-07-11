@@ -29,7 +29,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function authenticated()
+    {
+        $notification = array(
+            'status' => 'Logged In Successfully',
+            'alert-type' => 'success',
+        );
+        return redirect('/')->with($notification);
+    }
+
 
     /**
      * Create a new controller instance.
