@@ -44,12 +44,20 @@ class OrderController extends Controller
     {
         $order = Order::where('order_id', $orderId)->first();
         if ($order) {
-            $order->update([
-                'status' => $request->order_status
-            ]);
-            return redirect('admin/orders/'.$orderId)->with(
-                'message', 'Order Status Updated'
-            );
+            if ($request->order_status == '') {
+                return redirect('admin/orders/' . $orderId)->with(
+                    'message', 'Nothing to Update'
+                );
+            } else {
+                $order->update([
+                    'status' => $request->order_status,
+                ]);
+                return redirect('admin/orders/' . $orderId)->with(
+                    'message', 'Order Status Updated'
+                );
+            }
+            
+
         } else {
             return redirect('admin/orders/'.$orderId)->with(
                 'message', 'Order Id Not Found'
