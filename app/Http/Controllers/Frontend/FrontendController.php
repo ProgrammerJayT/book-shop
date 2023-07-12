@@ -14,8 +14,23 @@ class FrontendController extends Controller
     {
         $sliders = SiteSetting::where('status', '0')->get();
         $categories = Category::where('status', '0')->get();
+        $newArrivalBooks = Book::latest()->take(14)->get();
 
-        return view('frontend.index', compact('sliders', 'categories'));
+        return view('frontend.index', compact('sliders', 'categories', 'newArrivalBooks'));
+    }
+
+    public function newArrival()
+    {
+        $categories = Category::where('status', '0')->get();
+        $newArrivalBooks = Book::latest()->take(16)->get();
+        return view('frontend.pages.new-arrival', compact('categories','newArrivalBooks'));
+    }
+
+    public function featuredBooks()
+    {
+        $categories = Category::where('status', '0')->get();
+        $featuredBooks = Book::where('featured', '1')->latest()->get();
+        return view('frontend.pages.featured-books', compact('categories', 'featuredBooks'));
     }
 
     public function category($category)

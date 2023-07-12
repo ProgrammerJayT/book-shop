@@ -64,9 +64,9 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Book Images</label>
-                            <input type="file" name="image[]" multiple class="form-control mt-2">
-                            @error('image')
+                            <label>Featured</label><br/>
+                            <input type="checkbox" name="featured" {{$book->featured == '1' ? 'checked':''}} style="width:50px;height:50;"/>
+                            @error('featured')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
@@ -74,6 +74,13 @@
                             <label>Status</label><br/>
                             <input type="checkbox" name="status" {{$book->status == '1' ? 'checked':''}} style="width:50px;height:50;"/> Unchecked=Pending, Checked=Approved
                             @error('status')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Book Images</label>
+                            <input type="file" name="image[]" multiple class="form-control mt-2">
+                            @error('image')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>

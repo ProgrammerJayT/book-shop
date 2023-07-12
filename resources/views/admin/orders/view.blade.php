@@ -15,7 +15,13 @@
             <div class="card-body" id="card-body">
                     <h4 class="text-primary">
                         <i class="fa fa-shopping-cart text-dark"></i> My Order Details
-                        <a href="{{url('admin/orders')}}" class="btn btn-sm btn-secondary float-end">Back</a>
+                        <a href="{{url('admin/orders')}}" class="btn btn-sm btn-secondary float-end mx-1">Back</a>
+                        <a href="{{url('admin/invoice/'.$order->order_id.'/generate')}}" class="btn btn-sm btn-primary float-end mx-1">
+                            Download Invoice
+                        </a>
+                        <a href="{{url('admin/invoice/'.$order->order_id)}}" target="_blank" class="btn btn-sm btn-warning float-end mx-1">
+                            View Invoice
+                        </a>
                     </h4>
                     <hr>
                     <div class="row">
@@ -33,6 +39,7 @@
                             <hr>
                             <h6>Full Name: {{$order->user->name}}</h6>
                             <h6>Email Address: {{$order->user->email}}</h6>
+                            <h6>Phone: {{$order->user->phone}}</h6>
                             <h6>Address: {{$order->address}}</h6>
                             <h6>Zip Code: {{$order->zip_code}}</h6>
                         </div>

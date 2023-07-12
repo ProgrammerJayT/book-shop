@@ -92,7 +92,7 @@
                         <a class="nav-link" href="{{url('/new-arrivals')}}">New Arrivals</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/featured-book')}}">Featured Books</a>
+                        <a class="nav-link" href="{{url('/featured-books')}}">Featured Books</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/sell-book')}}">Sell Book</a>

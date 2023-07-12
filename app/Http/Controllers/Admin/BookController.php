@@ -139,6 +139,7 @@ class BookController extends Controller
                 'author' => $validatedData['author'],
                 'price' => $validatedData['price'],
                 'status' => $status == true ? '1':'0',
+                'featured' => $request->featured == true ? '1':'0',
             ]);
 
             if ($request->hasFile('image')) {

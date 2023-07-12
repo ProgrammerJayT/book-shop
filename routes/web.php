@@ -28,8 +28,12 @@ Route::get('/register', function() {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
-Route::get('/category/{category}', [App\Http\Controllers\Frontend\FrontendController::class, 'category']);
+Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function() {
+    Route::get('/','index')->name('index');
+    Route::get('/category/{category}', 'category');
+    Route::get('/new-arrivals', 'newArrival');
+    Route::get('/featured-books', 'featuredBooks');
+});
 Route::middleware(['auth'])->group(function() {
     Route::get('/cart', [App\Http\Controllers\Frontend\CartContoller::class, 'index']);
     Route::get('/checkout', [App\Http\Controllers\Frontend\CheckoutContoller::class, 'index']);
@@ -65,5 +69,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
         Route::get('/orders', 'index');
         Route::get('/orders/{orderId}', 'show');
         Route::put('/orders/{orderId}', 'updateOrderStatus');
+
+        Route::get('/invoice/{orderId}', 'viewInvoice');
+        Route::get('/invoice/{orderId}/generate', 'generateInvoice');
     });
 });

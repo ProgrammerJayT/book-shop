@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -63,5 +64,20 @@ class OrderController extends Controller
                 'message', 'Order Id Not Found'
             );
         }
+    }
+
+    public function viewInvoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        return view('admin.invoice.generate-invoice', compact('order'));
+    }
+
+    public function generateInvoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        $data = ['order' => $order];
+        $todayDate = Carbon::now()->format('d-m-Y');
+        $pdf = Pdf::loadView('admin.invoice.generate-invoice', $data);
+        return $pdf->download('invoice-'.$orderId.'-'.$todayDate.'.pdf');
     }
 }

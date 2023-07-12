@@ -6,8 +6,7 @@
                     <h4 class="footer-heading">Book-Shop</h4>
                     <div class="footer-underline"></div>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        Great space to browse for your next book
                     </p>
                 </div>
                 <div class="col-md-3">
@@ -21,8 +20,8 @@
                     @foreach ($categories as $category)
                     <div class="mb-2"><a href="{{url('category/'.$category->category_id)}}" class="text-white">{{$category->name}}</a></div>
                     @endforeach
-                    <div class="mb-2"><a href="" class="text-white">New Arrivals Books</a></div>
-                    <div class="mb-2"><a href="" class="text-white">Featured Books</a></div>
+                    <div class="mb-2"><a href="{{url('new-arrivals')}}" class="text-white">New Arrivals Books</a></div>
+                    <div class="mb-2"><a href="{{url('featured-books')}}" class="text-white">Featured Books</a></div>
                     <div class="mb-2"><a href="{{url('cart')}}" class="text-white">Cart</a></div>
                 </div>
                 <div class="col-md-3">
@@ -35,7 +34,7 @@
                     </div>
                     <div class="mb-2">
                         <a href="" class="text-white">
-                            <i class="fa fa-phone"></i> +91 888-XXX-XXXX
+                            <i class="fa fa-phone"></i> +2768 0631 110
                         </a>
                     </div>
                     <div class="mb-2">

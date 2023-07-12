@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('edition');
             $table->integer('price');
             $table->tinyInteger('status')->default('0')->comment('0=pending, 1=approved');
+            $table->tinyInteger('featured')->default('0')->comment('1=featured,0=not-featured');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
