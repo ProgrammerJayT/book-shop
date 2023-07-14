@@ -29,7 +29,7 @@
                     <div class="footer-underline"></div>
                     <div class="mb-2">
                         <p>
-                            <i class="fa fa-map-marker"></i> #444, some main road, some area, some street, bangalore, india - 560077
+                            <i class="fa fa-map-marker"></i> #444, some main road, some area, some street, bangalore, 560077
                         </p>
                     </div>
                     <div class="mb-2">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="mb-2">
                         <a href="" class="text-white">
-                            <i class="fa fa-envelope"></i> book-shop@example
+                            <i class="fa fa-envelope"></i> bs.bkshop@gmail.com
                         </a>
                     </div>
                 </div>
@@ -49,17 +49,8 @@
     <div class="copyright-area">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12 text-center">
                     <p class=""> &copy; 2023. All rights reserved.</p>
-                </div>
-                <div class="col-md-4">
-                    <div class="social-media">
-                        Get Connected:
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-instagram"></i></a>
-                        <a href=""><i class="fa fa-youtube"></i></a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $sites = SiteSetting::orderBy('site_id', 'Desc')->paginate();
+        $sites = SiteSetting::orderBy('site_id', 'Desc')->paginate(5);
         return view('admin.site.index', compact('sites'));
     }
 

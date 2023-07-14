@@ -46,6 +46,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="float-end">
+                    {{$sites->links()}}
+                </div>
             </div>
         </div>
     </div>

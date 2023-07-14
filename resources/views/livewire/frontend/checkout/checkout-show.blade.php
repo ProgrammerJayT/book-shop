@@ -73,10 +73,14 @@
                                             <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="onlinePayment-tab" tabindex="0">
                                                 <h6>Online Payment</h6>
                                                 <hr/>
-                                                {{-- <button type="button" wire:loading.attr="disabled" class="btn btn-warning">Pay Now (Online Payment)</button> --}}
-                                                <div >
-                                                    <div id="paypal-button-container"></div>
-                                                </div>
+                                                <button type="button" wire:loading.attr="disabled"wire:click="paidOnlineOrder" class="btn btn-warning">
+                                                    <span wire:loading.remove wire:target="paidOnlineOrder"> 
+                                                        Pay Now (Online Payment)
+                                                    </span>
+                                                    <span wire:loading wire:target="paidOnlineOrder"> 
+                                                        Placing Order
+                                                    </span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -97,75 +101,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    <script src="https://www.paypal.com/sdk/js?client-id=AeVVl8XAbIGmUyhgUASTv2smUT4Xv_Axs1r8jU_4pxyRdr5bX9jkTW2ZNdL0yN-sepb8SEFKO1PgZgWw&currency=USD"></script>
-    <script>
-      paypal.Buttons({
-        onClick()  {
-
-            // Show a validation error if the checkbox is not checked
-            if (!document.getElementById('fullname').value
-                || !document.getElementById('email').value
-                || !document.getElementById('phone').value
-                || !document.getElementById('address').value
-                || !document.getElementById('zipcode').value
-            ) 
-            {
-                Livewire.emit('validationForAll');
-                return false;
-            }else{
-                @this.set('fullname', document.getElementById('fullname').value);
-                @this.set('email', document.getElementById('email').value);
-                @this.set('phone', document.getElementById('phone').value);
-                @this.set('address', document.getElementById('address').value);
-                @this.set('zipcode', document.getElementById('zipcode').value);
-            }
-        },
-        // Order is created on the server and the order id is returned
-        createOrder() {
-          return fetch("/my-server/create-paypal-order", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            // use the "body" param to optionally pass additional order information
-            // like product skus and quantities
-            body: JSON.stringify({
-              cart: [
-                {
-                  sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                  quantity: "YOUR_PRODUCT_QUANTITY",
-                },
-              ],
-            }),
-          })
-          .then((response) => response.json())
-          .then((order) => order.id);
-        },
-        // Finalize the transaction on the server after payer approval
-        onApprove(data) {
-          return fetch("/my-server/capture-paypal-order", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              orderID: data.orderID
-            })
-          })
-          .then((response) => response.json())
-          .then((orderData) => {
-            // Successful capture! For dev/demo purposes:
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-            const transaction = orderData.purchase_units[0].payments.captures[0];
-            alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-            // When ready to go live, remove the alert and show a success message within this page. For example:
-            // const element = document.getElementById('paypal-button-container');
-            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-            // Or go to another URL:  window.location.href = 'thank_you.html';
-          });
-        }
-      }).render('#paypal-button-container');
-    </script>
-@endpush

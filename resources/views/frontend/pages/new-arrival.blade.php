@@ -7,8 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4>New Arrivals</h4>
-                <div class="underline mb-4"></div>
+                <h4 class="text-decoration-underline">New Arrivals:</h4>
             </div>
             @forelse ($newArrivalBooks as $book)
             <div class="col-md-3">
@@ -35,6 +34,9 @@
                         <p>{{$book->description}}</p>
                         <div>
                             <span class="selling-price">R{{$book->price}}</span>
+                        </div> 
+                        <div class="mt-2 d-flex justify-content-center">
+                            <a href="{{url('category/'.$book->category_id)}}" class="btn btn-outline-primary">View</a>
                         </div>
                     </div>
                 </div>

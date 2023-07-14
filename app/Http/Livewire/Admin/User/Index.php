@@ -72,11 +72,16 @@ class Index extends Component
                     $validatedData = $this->validate();
                     if ($user->role_as != '1') {
                         if ($this->password == $user->password) {
-                            $user->update([
-                                'name' => $this->name,
-                                'email' => $this->email,
-                                'role_as' => $this->role_as
-                            ]);
+                            if ($this->name == $user->name && $this->email == $user->email) {
+                                $this->dispatchBrowserEvent('error', ['message' => 'Nothing to update']);
+                            } else {
+                                $user->update([
+                                    'name' => $this->name,
+                                    'email' => $this->email,
+                                    'role_as' => $this->role_as,
+                                ]);
+                                $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
+                            } 
                         } else {
                             $user->update([
                                 'name' => $this->name,
@@ -84,51 +89,67 @@ class Index extends Component
                                 'password' => Hash::make($this->password),
                                 'role_as' => $this->role_as,
                             ]);
+                            $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                         }
-                        $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     } else {
                         if ($this->password == $user->password) {
-                            $user->update([
-                                'name' => $this->name,
-                                'email' => $this->email
-                            ]);
+                            if ($this->name == $user->name && $this->email == $user->email) {
+                                $this->dispatchBrowserEvent('error', ['message' => 'Nothing to update']);
+                            }else{
+                                $user->update([
+                                    'name' => $this->name,
+                                    'email' => $this->email,
+                                ]);
+                                $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
+                            }
                         } else {
                             $user->update([
                                 'name' => $this->name,
                                 'email' => $this->email,
                                 'password' => Hash::make($this->password),
                             ]);
+                            $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                         }
-                        $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     }
                 }
             }else{
                 if ($user->role_as != '1') {
                     if ($this->password == $user->password) {
-                        $user->update([
-                            'name' => $this->name,
-                            'role_as' => $this->role_as
-                        ]);
+                        if ($this->name == $user->name && $this->role_as == $user->role_as) {
+                            $this->dispatchBrowserEvent('error', ['message' => 'Nothing to update']);
+                        } else {
+                            $user->update([
+                                'name' => $this->name,
+                                'role_as' => $this->role_as,
+                            ]);
+                            $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
+                        }       
                     } else {
                         $user->update([
                             'name' => $this->name,
                             'password' => Hash::make($this->password),
                             'role_as' => $this->role_as,
                         ]);
+                        $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     }
                 } else {
                     if ($this->password == $user->password) {
-                        $user->update([
-                            'name' => $this->name
-                        ]);
+                        if ($this->name == $user->name) {
+                            $this->dispatchBrowserEvent('error', ['message' => 'Nothing to update']);
+                        } else {
+                            $user->update([
+                                'name' => $this->name,
+                            ]);
+                            $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
+                        }
                     } else {
                         $user->update([
                             'name' => $this->name,
                             'password' => Hash::make($this->password),
                         ]);
+                        $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
                     }
                 }
-                $this->dispatchBrowserEvent('success', ['message' => 'User Updated Successfully']);
             }
         }else{
             $this->dispatchBrowserEvent('error', ['message' => 'User does not exist']);

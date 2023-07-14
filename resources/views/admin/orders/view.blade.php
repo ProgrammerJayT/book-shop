@@ -13,14 +13,18 @@
                 <h4>Order Details</h4>
             </div>
             <div class="card-body" id="card-body">
-                    <h4 class="text-primary">
-                        <i class="fa fa-shopping-cart text-dark"></i> My Order Details
-                        <a href="{{url('admin/orders')}}" class="btn btn-sm btn-secondary float-end mx-1">Back</a>
-                        <a href="{{url('admin/invoice/'.$order->order_id.'/generate')}}" class="btn btn-sm btn-primary float-end mx-1">
+                    <h4>My Order Details
+                        <a href="{{url('admin/orders')}}" class="btn btn-sm btn-secondary float-end mx-1">
+                           Back
+                        </a>
+                        <a href="{{url('admin/invoice/'.$order->order_id.'/generate')}}" class="btn btn-sm btn-primary float-end btn-txt mx-1">
                             Download Invoice
                         </a>
-                        <a href="{{url('admin/invoice/'.$order->order_id)}}" target="_blank" class="btn btn-sm btn-warning float-end mx-1">
+                        <a href="{{url('admin/invoice/'.$order->order_id)}}" target="_blank" class="btn btn-sm btn-warning float-end btn-txt mx-1">
                             View Invoice
+                        </a>
+                        <a href="{{url('admin/invoice/'.$order->order_id.'/mail')}}" class="btn btn-sm btn-danger float-end btn-txt mx-1">
+                            Send Invoice Via Email
                         </a>
                     </h4>
                     <hr>

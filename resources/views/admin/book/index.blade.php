@@ -42,7 +42,7 @@
                             <td>{{$book->name}}</td>
                             <td>{{$book->edition}}</td>
                             <td>{{$book->author}}</td>
-                            <td>{{$book->price}}</td>
+                            <td>R{{$book->price}}</td>
                             <td>
                             @if ($book->user)
                                 {{$book->user->name}}
@@ -70,7 +70,10 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
+                <div class="float-end">
+                    {{$books->links()}}
+                </div>
+            </div> 
         </div>
     </div>
 </div>

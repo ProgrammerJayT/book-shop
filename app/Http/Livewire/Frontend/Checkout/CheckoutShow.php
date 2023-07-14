@@ -7,38 +7,15 @@ use App\Models\Order;
 use Livewire\Component;
 use App\Models\CartItem;
 use App\Models\OrderItem;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Mail\InvoiceOrderMailable;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutShow extends Component
 {
     public $categories, $carts, $totalBookAmount = 0;
     public $fullname, $email, $phone, $zipcode, $address, $payment_mode = NULL, $payment_id = NULL; 
-
-    protected $listeners = [
-        'validationForAll',
-        'transactionEmit' => 'paidOnlineOrder'
-    ];
-
-    public function paidOnlineOrder($vaule)
-    {
-        $this->payment_id = $vaule;
-        $this->payment_mode = 'Online';
-
-        $cashOrder = $this->placeOrder();
-        if ($cashOrder) {
-            CartItem::where('user_id', auth()->user()->user_id)->delete();
-            session()->flash('message', 'Order Placed Successfully');
-            $this->dispatchBrowserEvent('success', [
-                'message' => "Order Placed Successfully",
-            ]);
-
-            return redirect()->to('thank-you');
-        } else {
-            $this->dispatchBrowserEvent('error', [
-                'message' => "Something went wrong",
-            ]);
-        }
-
-    }
 
     public function validationForAll()
     {
@@ -95,6 +72,28 @@ class CheckoutShow extends Component
         $cashOrder = $this->placeOrder();
         if ($cashOrder) {
             CartItem::where('user_id', auth()->user()->user_id)->delete();
+            try {
+                $order = Order::findOrFail($cashOrder->order_id);
+                $data = ['order' => $order];
+                $email = $order->user->email;
+                $messageText = 'Hi ' . $order->user->name . '! Thank you for your Order.';
+                $maildata = [
+                    "subject" => "Your Order Invoice",
+                    "message" => $messageText,
+                ];
+                $pdf = Pdf::loadView('admin.invoice.generate-invoice', $data);
+                if ($email) {
+                    Mail::to($email)->send(new InvoiceOrderMailable($pdf, $maildata));
+                }else {
+                    $this->dispatchBrowserEvent('error', [
+                        'message' => "Invalid email",
+                    ]);
+                } 
+            } catch (\Exception $e) {
+                $this->dispatchBrowserEvent('error', [
+                    'message' => "Something went wrong",
+                ]);
+            }
             session()->flash('message', 'Order Placed Successfully');
             $this->dispatchBrowserEvent('success', [
                 'message' => "Order Placed Successfully",
@@ -108,6 +107,47 @@ class CheckoutShow extends Component
         }
     }
 
+    public function paidOnlineOrder()
+    {
+        $this->payment_id = random_int(1000000000000,9999999999999);
+        $this->payment_mode = 'Online';
+        
+        $cashOrder = $this->placeOrder();
+        if ($cashOrder) {
+            CartItem::where('user_id', auth()->user()->user_id)->delete();
+            try {
+                $order = Order::findOrFail($cashOrder->order_id);
+                $data = ['order' => $order];
+                $email = $order->user->email;
+                $messageText = 'Hi ' . $order->user->name . '! Thank you for your Order.';
+                $maildata = [
+                    "subject" => "Your Order Invoice",
+                    "message" => $messageText,
+                ];
+                $pdf = Pdf::loadView('admin.invoice.generate-invoice', $data);
+                if ($email) {
+                    Mail::to($email)->send(new InvoiceOrderMailable($pdf, $maildata));
+                } else {
+                    $this->dispatchBrowserEvent('error', [
+                        'message' => "Invalid email",
+                    ]);
+                }
+            } catch (\Exception $e) {
+                $this->dispatchBrowserEvent('error', [
+                    'message' => "Something went wrong",
+                ]);
+            }
+            session()->flash('message', 'Order Placed Successfully');
+            $this->dispatchBrowserEvent('success', [
+                'message' => "Order Placed Successfully",
+            ]);
+            return redirect()->to('thank-you');
+        } else {
+            $this->dispatchBrowserEvent('error', [
+                'message' => "Something went wrong",
+            ]);
+        }
+    }
     public function totalBookAmount()
     {
         $this->totalBookAmount = 0;

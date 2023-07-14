@@ -23,6 +23,14 @@
     <link rel="shortcut icon" href="{{asset('backend2/images/favicon.png')}}" />
     <!-- Toaster notification -->
     <link rel="stylesheet" href="{{asset('backend2/vendors/toastr/toastr.min.css')}}">
+    <style>
+      .form-control{
+        border: 1px solid #ddd;
+      }
+      .sidebar .nav .nav-item.active > .nav-link{
+        background-color: #e9e9e9;
+      }
+    </style>
     @livewireStyles
 </head>
 <body>

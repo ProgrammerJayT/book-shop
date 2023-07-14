@@ -19,6 +19,19 @@ class FrontendController extends Controller
         return view('frontend.index', compact('sliders', 'categories', 'newArrivalBooks'));
     }
 
+    public function searchBooks(Request $request)
+    {
+        if ($request->search) {
+            $categories = Category::where('status', '0')->get();
+            $searchBooks = Book::where('name','LIKE','%'.$request->search.'%')->latest()->paginate(15);
+            return view('frontend.pages.search', compact('categories','searchBooks'));
+        } else {
+            return redirect()->back()->with('error', [
+                'message' => "Empty Search",
+            ]);
+        }
+    }
+
     public function newArrival()
     {
         $categories = Category::where('status', '0')->get();

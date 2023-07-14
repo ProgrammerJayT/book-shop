@@ -33,12 +33,23 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
     Route::get('/category/{category}', 'category');
     Route::get('/new-arrivals', 'newArrival');
     Route::get('/featured-books', 'featuredBooks');
+    Route::get('/search', 'searchBooks');
 });
 Route::middleware(['auth'])->group(function() {
     Route::get('/cart', [App\Http\Controllers\Frontend\CartContoller::class, 'index']);
     Route::get('/checkout', [App\Http\Controllers\Frontend\CheckoutContoller::class, 'index']);
     Route::get('/orders', [App\Http\Controllers\Frontend\OrderController::class, 'index']);
     Route::get('/orders/{orderId}', [App\Http\Controllers\Frontend\OrderController::class, 'show']);
+
+    Route::controller(App\Http\Controllers\Frontend\BookController::class)->group(function() {
+        Route::get('/sell-book', 'index');
+        Route::get('/books/create', 'create');
+        Route::post('/books', 'store');
+    });
+    Route::controller(App\Http\Controllers\Frontend\ProfileController::class)->group(function() {
+        Route::get('/profile', 'index');
+        Route::put('/profile/update/{userId}', 'update');
+    });
 }); 
 Route::get('/thank-you', [App\Http\Controllers\Frontend\FrontendController::class, 'thankyou']);  
 
@@ -72,5 +83,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
 
         Route::get('/invoice/{orderId}', 'viewInvoice');
         Route::get('/invoice/{orderId}/generate', 'generateInvoice');
+        Route::get('/invoice/{orderId}/mail', 'mailInvoice');
     });
 });
