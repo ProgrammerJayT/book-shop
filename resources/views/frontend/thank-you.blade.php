@@ -11,7 +11,7 @@
                         <h5 class="alert alert-success">{{session('message')}}</h5>
                     @endif
                     <div class="p-4 shadow bg-white">
-                        <h2>Book-Shop</h2>
+                        <h2>Store In</h2>
                         <h4>Thank You for Shopping with Us</h4>
                         <a href="{{url('/')}}" class="btn btn-primary">Shop Now</a>
                     </div>

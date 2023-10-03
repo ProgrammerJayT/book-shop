@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $thisYearOrders = Order::where('created_at', 'LIKE','%'.$thisYear.'%')->count();
 
         return view('admin.dashboard' , compact(
-            'totalBooks','totalCategories','totalAllUsers','totalUserU',
+            'totalItems','totalCategories','totalAllUsers','totalUserU',
             'totalUserA','totalOrders','todayOrders','thisMonthOrders','thisYearOrders'
         ));
     }

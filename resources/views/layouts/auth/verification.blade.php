@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Book-Shop') }}</title>
+    <title>{{ config('app.name', 'Store In') }}</title>
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/css/bootv4.1/bootstrap.min.css') !!}" rel="stylesheet">
     <!-- Toaster notification -->

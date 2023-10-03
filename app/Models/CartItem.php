@@ -22,6 +22,6 @@ class CartItem extends Model
      */
     public function item(): BelongsTo
     {
-        return $this->belongsTo(Book::class, 'item_id');
+        return $this->belongsTo(Item::class, 'item_id');
     }
 }

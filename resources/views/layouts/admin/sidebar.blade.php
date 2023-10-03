@@ -21,12 +21,12 @@
     <li class="nav-item {{Request::is('admin/items*') ? 'active':''}}">
       <a class="nav-link" data-bs-toggle="collapse" href="#ui-product" aria-expanded="{{Request::is('admin/items*') ? 'true':'false'}}" aria-controls="ui-product">
         <i class="mdi mdi-item-multiple menu-icon"></i>
-        <span class="menu-title">Books</span>
+        <span class="menu-title">Items</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse {{Request::is('admin/items*') ? 'show':''}}" id="ui-product">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link {{Request::is('admin/items*') || Request::is('admin/items/create*') || Request::is('admin/items/*/edit') ? 'active':''}}" href="{{url('admin/items')}}">All Books</a></li>
+          <li class="nav-item"> <a class="nav-link {{Request::is('admin/items*') || Request::is('admin/items/create*') || Request::is('admin/items/*/edit') ? 'active':''}}" href="{{url('admin/items')}}">All Items</a></li>
         </ul>
       </div>
     </li>

@@ -24,7 +24,7 @@
                 </p>
                 <p>Kindly find your Invoice attached</p>
                 <p> Warm Regards,</p>
-                <p> Book-Shop </p>
+                <p> Store In </p>
             </div>
         </div>
     </div>

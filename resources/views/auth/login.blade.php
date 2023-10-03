@@ -6,7 +6,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-        <a href="{{route('index')}}" class="h1">Book-Shop</a>
+        <a href="{{route('index')}}" class="h1">Store In</a>
         </div>
         <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>

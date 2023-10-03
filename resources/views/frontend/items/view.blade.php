@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'My Books')
+@section('title', 'My Items')
 
 @section('content')
 <div class="py-3 py-md-5">
@@ -11,8 +11,8 @@
                     <div class="alert alert-success">{{session('message')}}</div>
                 @endif
                 <div class="shadow bg-white p-3">
-                    <h4 class="mb-4">My Books
-                        <a href="{{url('items/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
+                    <h4 class="mb-4">My Items
+                        <a href="{{url('items/create')}}" class="btn btn-sm btn-secondary float-end">Add Item</a>
                     </h4>
                     <hr>
 
@@ -48,7 +48,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">No Books Found...</td>
+                                    <td colspan="7" class="text-center">No Items Found...</td>
                                 </tr>
                                 @endforelse
                             </tbody>

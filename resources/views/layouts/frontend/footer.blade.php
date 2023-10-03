@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <h4 class="footer-heading">Book-Shop</h4>
+                    <h4 class="footer-heading">Store In</h4>
                     <div class="footer-underline"></div>
                     <p>
                         Great space to browse for your next item

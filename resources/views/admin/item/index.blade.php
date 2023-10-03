@@ -8,8 +8,8 @@
         @endif
         <div class="card">
             <div class="card-header">
-                <h4>Books List
-                    <a href="{{url('admin/items/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
+                <h4>Items List
+                    <a href="{{url('admin/items/create')}}" class="btn btn-sm btn-secondary float-end">Add Item</a>
                 </h4>
             </div>
             <div class="card-body" id="card-body">
@@ -65,7 +65,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="10" class="text-center">No Books Found...</td>
+                            <td colspan="10" class="text-center">No Items Found...</td>
                         </tr>
                         @endforelse
                     </tbody>

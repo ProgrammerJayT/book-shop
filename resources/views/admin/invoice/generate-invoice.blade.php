@@ -88,7 +88,7 @@
         <thead>
             <tr>
                 <th width="50%" colspan="2">
-                    <h2 class="text-start">Book-Shop</h2>
+                    <h2 class="text-start">Store In</h2>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">
                     <span>Invoice #{{$order->order_id}}</span> <br>
@@ -176,7 +176,7 @@
 
     <br>
     <p class="text-center">
-        Thank your for shopping with Book-Shop
+        Thank your for shopping with Store In
     </p>
 
 </body>

@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Add Book
+                <h4>Add Item
                     <a href="{{url('admin/items')}}" class="btn btn-sm btn-secondary float-end">Back</a>
                 </h4>
             </div>
@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Book Name</label>
+                            <label>Item Name</label>
                             <input type="text" name="name" placeholder="name" value="{{old('name')}}" class="form-control mt-2" required>
                             @error('name')
                                 <small class="text-danger">{{$message}}</small>
@@ -58,7 +58,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Book Images</label>
+                            <label>Item Images</label>
                             <input type="file" name="image[]" multiple class="form-control mt-2" required>
                             @error('image')
                                 <small class="text-danger">{{$message}}</small>
