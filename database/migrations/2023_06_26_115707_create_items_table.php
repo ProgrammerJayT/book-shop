@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->increments('book_id');
+        Schema::create('items', function (Blueprint $table) {
+            $table->increments('item_id');
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->string('name');
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('items');
     }
 };

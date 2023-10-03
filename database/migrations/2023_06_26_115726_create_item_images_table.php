@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_images', function (Blueprint $table) {
-            $table->increments('book_image_id');
-            $table->integer('book_id')->unsigned();
-            $table->string('url'); //uploads/book_images/bookid/images.extension
+        Schema::create('item_images', function (Blueprint $table) {
+            $table->increments('item_image_id');
+            $table->integer('item_id')->unsigned();
+            $table->string('url'); //uploads/item_images/itemid/images.extension
             $table->timestamps();
 
-            $table->foreign('book_id')->references('book_id')->on('books')->onDelete('cascade');
+            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_images');
+        Schema::dropIfExists('item_images');
     }
 };

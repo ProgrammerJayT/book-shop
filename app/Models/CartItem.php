@@ -16,12 +16,12 @@ class CartItem extends Model
     protected $primaryKey = 'cart_item_id';
 
     /**
-     * Get the book that owns the CartItem
+     * Get the item that owns the CartItem
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function book(): BelongsTo
+    public function item(): BelongsTo
     {
-        return $this->belongsTo(Book::class, 'book_id');
+        return $this->belongsTo(Book::class, 'item_id');
     }
 }

@@ -6,11 +6,11 @@
         <div class="card">
             <div class="card-header">
                 <h4>Add Book
-                    <a href="{{url('admin/books')}}" class="btn btn-sm btn-secondary float-end">Back</a>
+                    <a href="{{url('admin/items')}}" class="btn btn-sm btn-secondary float-end">Back</a>
                 </h4>
             </div>
             <div class="card-body" id="card-body">
-                <form action="{{url('admin/books')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('admin/items')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">

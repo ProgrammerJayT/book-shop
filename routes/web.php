@@ -32,7 +32,7 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
     Route::get('/','index')->name('index');
     Route::get('/category/{category}', 'category');
     Route::get('/new-arrivals', 'newArrival');
-    Route::get('/featured-books', 'featuredBooks');
+    Route::get('/featured-items', 'featuredBooks');
     Route::get('/search', 'searchBooks');
 });
 Route::middleware(['auth'])->group(function() {
@@ -42,9 +42,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/orders/{orderId}', [App\Http\Controllers\Frontend\OrderController::class, 'show']);
 
     Route::controller(App\Http\Controllers\Frontend\BookController::class)->group(function() {
-        Route::get('/sell-book', 'index');
-        Route::get('/books/create', 'create');
-        Route::post('/books', 'store');
+        Route::get('/sell-item', 'index');
+        Route::get('/items/create', 'create');
+        Route::post('/items', 'store');
     });
     Route::controller(App\Http\Controllers\Frontend\ProfileController::class)->group(function() {
         Route::get('/profile', 'index');
@@ -68,13 +68,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/users', App\Http\Livewire\Admin\User\Index::class);
     Route::get('/categories', App\Http\Livewire\Admin\Category\Index::class);
     Route::controller(App\Http\Controllers\Admin\BookController::class)->group(function() {
-        Route::get('/books', 'index');
-        Route::get('/books/create', 'create');
-        Route::post('/books', 'store');
-        Route::get('/books/{book}/edit', 'edit');
-        Route::put('/books/{book}', 'update');
-        Route::get('/books/{book_id}/delete', 'destroy');
-        Route::get('/book-image/{book_image_id}/delete', 'destroyImage');
+        Route::get('/items', 'index');
+        Route::get('/items/create', 'create');
+        Route::post('/items', 'store');
+        Route::get('/items/{item}/edit', 'edit');
+        Route::put('/items/{item}', 'update');
+        Route::get('/items/{item_id}/delete', 'destroy');
+        Route::get('/item-image/{item_image_id}/delete', 'destroyImage');
     });
     Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function() {
         Route::get('/orders', 'index');

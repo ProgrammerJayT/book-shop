@@ -157,8 +157,8 @@
         @foreach ($order->orderItems as $key=>$item)
             <tr>
                 <td width="10%">{{$key+1}}</td>
-                <td width="10%">{{$item->book->name}}</td>
-                <td width="10%">{{$item->book->edition}}</td>
+                <td width="10%">{{$item->item->name}}</td>
+                <td width="10%">{{$item->item->edition}}</td>
                 <td width="10%">R{{$item->price}}</td>
                 <td width="10%">{{$item->quantity}}</td>
                 <td width="15%" class="fw-bold">R{{$item->price * $item->quantity}}</td>

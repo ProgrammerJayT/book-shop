@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Book;
+use App\Models\Item;
 use App\Models\Category;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -15,14 +15,14 @@ class BookController extends Controller
     public function index()
     {
         $categories = Category::where('status', '0')->get();
-        $books = Book::where('user_id', auth()->user()->user_id)->orderBy('book_id', 'Desc')->paginate(5);
+        $items = Item::where('user_id', auth()->user()->user_id)->orderBy('item_id', 'Desc')->paginate(5);
 
-        return view('frontend.books.view', compact('categories', 'books'));
+        return view('frontend.items.view', compact('categories', 'items'));
     }
     public function create()
     {
         $categories = Category::all();
-        return view('frontend.books.create', compact('categories'));
+        return view('frontend.items.create', compact('categories'));
     }
     public function store(BookFormRequest $request)
     {
@@ -48,7 +48,7 @@ class BookController extends Controller
                     );
                     break;
             }
-            $book = $category->books()->create([
+            $item = $category->items()->create([
                 'category_id' => $validatedData['category_id'],
                 'user_id' => Auth::user()->user_id,
                 'name' => $validatedData['name'],
@@ -60,29 +60,29 @@ class BookController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                $uploadPath = 'uploads/book_images/'.$book->book_id.'/';
+                $uploadPath = 'uploads/item_images/' . $item->item_id . '/';
                 $i = 1;
                 foreach ($request->file('image') as $imageFile) {
                     $extension = $imageFile->getClientOriginalExtension();
-                    $filename = time().$i++.'.'.$extension;
+                    $filename = time() . $i++ . '.' . $extension;
                     $imageFile->move($uploadPath, $filename);
-                    $finalImagePathName = $uploadPath.$filename;
+                    $finalImagePathName = $uploadPath . $filename;
 
-                    $book->bookImages()->create([
-                        'book_id' => $book->book_id,
+                    $item->itemImages()->create([
+                        'item_id' => $item->item_id,
                         'url' => $finalImagePathName,
                     ]);
                 }
             }
             $notification = array(
-                'message' => 'Book Created Successfully'
+                'message' => 'Item Created Successfully'
             );
-        }else {
+        } else {
             $notification = array(
                 'message' => 'Category does not exist'
             );
         }
 
-        return redirect('/sell-book')->with($notification);
+        return redirect('/sell-item')->with($notification);
     }
 }

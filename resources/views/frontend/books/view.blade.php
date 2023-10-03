@@ -12,7 +12,7 @@
                 @endif
                 <div class="shadow bg-white p-3">
                     <h4 class="mb-4">My Books
-                        <a href="{{url('books/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
+                        <a href="{{url('items/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
                     </h4>
                     <hr>
 
@@ -30,21 +30,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($books as $key=>$book)
+                                @forelse ($items as $key=>$item)
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>
-                                    @if ($book->category)     
-                                        {{$book->category->name}}
+                                    @if ($item->category)     
+                                        {{$item->category->name}}
                                     @else
                                         No category
                                     @endif
                                     </td>
-                                    <td>{{$book->name}}</td>
-                                    <td>{{$book->edition}}</td>
-                                    <td>{{$book->author}}</td>
-                                    <td>{{$book->price}}</td>
-                                    <td>{{$book->status == 1 ? 'Approved':'Pending'}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->edition}}</td>
+                                    <td>{{$item->author}}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->status == 1 ? 'Approved':'Pending'}}</td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -54,7 +54,7 @@
                             </tbody>
                         </table>
                         <div class="float-end">
-                            {{$books->links()}}
+                            {{$items->links()}}
                         </div>
                     </div>
                 </div>

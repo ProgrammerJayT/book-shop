@@ -47,9 +47,9 @@ class CheckoutShow extends Component
         foreach ($this->carts as $cartItem) {
             $orderItems = OrderItem::create([
                 'order_id' => $order->order_id,
-                'book_id' => $cartItem->book_id,
+                'item_id' => $cartItem->item_id,
                 'quantity' => $cartItem->quantity,
-                'price' => $cartItem->book->price,
+                'price' => $cartItem->item->price,
             ]);
         }
         if ($order) {
@@ -153,7 +153,7 @@ class CheckoutShow extends Component
         $this->totalBookAmount = 0;
         $this->carts = CartItem::where('user_id', auth()->user()->user_id)->get();
         foreach ($this->carts as $cartItem) {
-            $this->totalBookAmount += $cartItem->book->price * $cartItem->quantity;
+            $this->totalBookAmount += $cartItem->item->price * $cartItem->quantity;
         }
         return $this->totalBookAmount;
     }

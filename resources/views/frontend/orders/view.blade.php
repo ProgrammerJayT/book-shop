@@ -56,15 +56,15 @@
                                     <tr>
                                         <td width="10%">{{$key+1}}</td>
                                         <td width="10%">
-                                            @if ($item->book->bookImages)
-                                            <img src="{{asset($item->book->bookImages[0]->url)}}" 
+                                            @if ($item->item->itemImages)
+                                            <img src="{{asset($item->item->itemImages[0]->url)}}" 
                                                 style="width: 50px; height: 50px" alt="">
                                             @else
                                             <img src="" style="width: 50px; height: 50px" alt="">
                                             @endif
                                         </td>
-                                        <td width="10%">{{$item->book->name}}</td>
-                                        <td width="10%">{{$item->book->edition}}</td>
+                                        <td width="10%">{{$item->item->name}}</td>
+                                        <td width="10%">{{$item->item->edition}}</td>
                                         <td width="10%">R{{$item->price}}</td>
                                         <td width="10%">{{$item->quantity}}</td>
                                         <td width="10%" class="fw-bold">R{{$item->price * $item->quantity}}</td>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Book;
+use App\Models\Item;
 use App\Models\Category;
 use App\Models\BookImage;
 use Illuminate\Http\Request;
@@ -15,14 +15,14 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::orderBy('book_id', 'Desc')->paginate(5);
-        return view('admin.book.index', compact('books'));
+        $items = Item::orderBy('item_id', 'Desc')->paginate(5);
+        return view('admin.item.index', compact('items'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.book.create', compact('categories'));
+        return view('admin.item.create', compact('categories'));
     }
 
     public function store(BookFormRequest $request)
@@ -51,10 +51,10 @@ class BookController extends Controller
             }
             if (Auth::user()->role_as = 1) {
                 $status = '1';
-            }else{
+            } else {
                 $status = '0';
             }
-            $book = $category->books()->create([
+            $item = $category->items()->create([
                 'category_id' => $validatedData['category_id'],
                 'user_id' => Auth::user()->user_id,
                 'name' => $validatedData['name'],
@@ -66,45 +66,45 @@ class BookController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                $uploadPath = 'uploads/book_images/'.$book->book_id.'/';
+                $uploadPath = 'uploads/item_images/' . $item->item_id . '/';
                 $i = 1;
                 foreach ($request->file('image') as $imageFile) {
                     $extension = $imageFile->getClientOriginalExtension();
-                    $filename = time().$i++.'.'.$extension;
+                    $filename = time() . $i++ . '.' . $extension;
                     $imageFile->move($uploadPath, $filename);
-                    $finalImagePathName = $uploadPath.$filename;
+                    $finalImagePathName = $uploadPath . $filename;
 
-                    $book->bookImages()->create([
-                        'book_id' => $book->book_id,
+                    $item->itemImages()->create([
+                        'item_id' => $item->item_id,
                         'url' => $finalImagePathName,
                     ]);
                 }
             }
             $notification = array(
-                'message' => 'Book Created Successfully'
+                'message' => 'Item Created Successfully'
             );
-        }else {
+        } else {
             $notification = array(
                 'message' => 'Category does not exist'
             );
         }
 
-        return redirect('admin/books')->with($notification);
+        return redirect('admin/items')->with($notification);
     }
 
-    public function edit(int $book_id)
+    public function edit(int $item_id)
     {
         $categories = Category::all();
-        $book = Book::findOrFail($book_id);
-        return view('admin.book.edit', compact('categories', 'book'));
+        $item = Item::findOrFail($item_id);
+        return view('admin.item.edit', compact('categories', 'item'));
     }
 
-    public function update(BookFormRequest $request, int $book_id)
+    public function update(BookFormRequest $request, int $item_id)
     {
         $validatedData = $request->validated();
-        $book = Category::findOrFail($validatedData['category_id'])
-                ->books()->where('book_id', $book_id)->first();
-        if ($book) {
+        $item = Category::findOrFail($validatedData['category_id'])
+            ->items()->where('item_id', $item_id)->first();
+        if ($item) {
             switch ($validatedData['edition']) {
                 case 1:
                     $edition = '1st';
@@ -124,26 +124,26 @@ class BookController extends Controller
                     );
                     break;
             }
-            if (Auth::user()->role_as == '1' && $book->status == '1' && $book->user->role_as == '1') {
-                $status = $book->status;
+            if (Auth::user()->role_as == '1' && $item->status == '1' && $item->user->role_as == '1') {
+                $status = $item->status;
             } else {
                 $status = $request->status;
             }
 
-            $book->update([
+            $item->update([
                 'category_id' => $validatedData['category_id'],
-                'user_id' => $book->user_id,
+                'user_id' => $item->user_id,
                 'name' => $validatedData['name'],
                 'description' => $validatedData['description'],
                 'edition' => $edition,
                 'author' => $validatedData['author'],
                 'price' => $validatedData['price'],
-                'status' => $status == true ? '1':'0',
-                'featured' => $request->featured == true ? '1':'0',
+                'status' => $status == true ? '1' : '0',
+                'featured' => $request->featured == true ? '1' : '0',
             ]);
 
             if ($request->hasFile('image')) {
-                $uploadPath = 'uploads/book_images/' . $book->book_id . '/';
+                $uploadPath = 'uploads/item_images/' . $item->item_id . '/';
                 $i = 1;
                 foreach ($request->file('image') as $imageFile) {
                     $extension = $imageFile->getClientOriginalExtension();
@@ -151,61 +151,60 @@ class BookController extends Controller
                     $imageFile->move($uploadPath, $filename);
                     $finalImagePathName = $uploadPath . $filename;
 
-                    $book->bookImages()->create([
-                        'book_id' => $book->book_id,
+                    $item->itemImages()->create([
+                        'item_id' => $item->item_id,
                         'url' => $finalImagePathName,
                     ]);
                 }
             }
             $notification = array(
-                'message' => 'Book Updated Successfully'
+                'message' => 'Item Updated Successfully'
             );
-
         } else {
             $notification = array(
-                'message' => 'No such Book Id Found'
+                'message' => 'No such item Id Found'
             );
         }
-        return redirect('admin/books')->with($notification);
+        return redirect('admin/items')->with($notification);
     }
 
-    public function destroyImage(int $book_image_id)
+    public function destroyImage(int $item_image_id)
     {
-        $bookImage = BookImage::findOrFail($book_image_id);
-        if ($bookImage) {
-            if (File::exists($bookImage->url)) {
-                File::delete($bookImage->url);
+        $itemImage = BookImage::findOrFail($item_image_id);
+        if ($itemImage) {
+            if (File::exists($itemImage->url)) {
+                File::delete($itemImage->url);
             }
             $notification = array(
-                'message' => 'Book Image Deleted'
+                'message' => 'Item Image Deleted'
             );
         } else {
             $notification = array(
-                'message' => 'Book Image Already Removed'
+                'message' => 'Item Image Already Removed'
             );
         }
-        $bookImage->delete();
+        $itemImage->delete();
         return redirect()->back()->with($notification);
     }
 
-    public function destroy(int $book_id)
+    public function destroy(int $item_id)
     {
-        $book = Book::findOrFail($book_id);
-        if ($book) {
-            if ($book->bookImages) {
-                foreach ($book->bookImages as $image) {
+        $item = Item::findOrFail($item_id);
+        if ($item) {
+            if ($item->itemImages) {
+                foreach ($item->itemImages as $image) {
                     if (File::exists($image->url)) {
                         File::delete($image->url);
                     }
                 }
             }
-            $book->delete();
+            $item->delete();
             $notification = array(
-                'message' => 'Book Deleted Successfully',
+                'message' => 'Item Deleted Successfully',
             );
         } else {
             $notification = array(
-                'message' => 'Book Already Deleted'
+                'message' => 'Item Already Deleted'
             );
         }
         return redirect()->back()->with($notification);

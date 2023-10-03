@@ -14,7 +14,7 @@ class Category extends Model
 
     protected $primaryKey = 'category_id';
 
-    public function books()
+    public function items()
     {
         return $this->hasMany(Book::class, 'category_id');
     }

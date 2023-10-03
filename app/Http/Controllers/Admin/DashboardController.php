@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Book;
+use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Category;
@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalBooks = Book::count();
+        $totalItems = Item::count();
         $totalCategories = Category::count();
         $totalAllUsers = User::count();
         $totalUserU = User::where('role_as', '0')->count();

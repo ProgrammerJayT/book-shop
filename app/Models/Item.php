@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use App\Models\Category;
-use App\Models\BookImage;
+use App\Models\ItemImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Book extends Model
+class Item extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected $primaryKey = 'book_id';
+    protected $primaryKey = 'item_id';
 
     public function category()
     {
@@ -25,8 +25,8 @@ class Book extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function bookImages() 
+    public function itemImages() 
     {
-        return $this->hasMany(BookImage::class, 'book_id');
+        return $this->hasMany(BookImage::class, 'item_id');
     }
 }

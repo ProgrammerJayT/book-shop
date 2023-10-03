@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->increments('cart_item_id');
             $table->integer('user_id')->unsigned();
-            $table->integer('book_id')->unsigned();
+            $table->integer('item_id')->unsigned();
             $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('book_id')->references('book_id')->on('books')->onDelete('cascade');
+            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
         });
     }
 

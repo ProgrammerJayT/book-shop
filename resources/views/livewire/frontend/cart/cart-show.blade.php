@@ -27,24 +27,24 @@
                             </div>
                         </div>
                         @forelse ($cart as $cartItem)
-                        @if ($cartItem->book)
+                        @if ($cartItem->item)
                         <div class="cart-item">
                             <div class="row">
                                 <div class="col-md-6 my-auto">
                                     <label class="product-name text-primary text-uppercase">
-                                        @if ($cartItem->book->bookImages)
-                                        <img src="{{asset($cartItem->book->bookImages[0]->url)}}" 
+                                        @if ($cartItem->item->itemImages)
+                                        <img src="{{asset($cartItem->item->itemImages[0]->url)}}" 
                                             style="width: 50px; height: 50px" alt="">
                                         @else
                                         <img src="" style="width: 50px; height: 50px" alt="">
                                         @endif
-                                        {{$cartItem->book->name}} : 
+                                        {{$cartItem->item->name}} : 
                                         <span class="text-secondary text-lowercase" style="font-size: 10px;">
-                                            {{$cartItem->book->edition}} edition</span>
+                                            {{$cartItem->item->edition}} edition</span>
                                     </label>
                                 </div>
                                 <div class="col-md-1 my-auto">
-                                    <label class="price">R{{$cartItem->book->price}}</label>
+                                    <label class="price">R{{$cartItem->item->price}}</label>
                                 </div>
                                 <div class="col-md-2 col-7 my-auto">
                                     <div class="quantity">
@@ -56,8 +56,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1 my-auto">
-                                    <label class="price">R{{$cartItem->book->price * $cartItem->quantity }}</label>
-                                    @php $totalPrice += $cartItem->book->price * $cartItem->quantity @endphp
+                                    <label class="price">R{{$cartItem->item->price * $cartItem->quantity }}</label>
+                                    @php $totalPrice += $cartItem->item->price * $cartItem->quantity @endphp
                                 </div>
                                 <div class="col-md-2 col-5 my-auto">
                                     <div class="remove">

@@ -47,7 +47,7 @@
                 <div class="card card-body bg-success text-white mb-3">
                     <label>Total Books</label>
                     <h1>{{$totalBooks}}</h1>
-                    <a href="{{url('admin/books')}}" class="text-white">view</a>
+                    <a href="{{url('admin/items')}}" class="text-white">view</a>
                 </div>
             </div>
         </div>

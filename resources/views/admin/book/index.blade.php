@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>Books List
-                    <a href="{{url('admin/books/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
+                    <a href="{{url('admin/items/create')}}" class="btn btn-sm btn-secondary float-end">Add Book</a>
                 </h4>
             </div>
             <div class="card-body" id="card-body">
@@ -29,38 +29,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($books as $key=>$book)
+                        @forelse ($items as $key=>$item)
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>
-                            @if ($book->category)     
-                                {{$book->category->name}}
+                            @if ($item->category)     
+                                {{$item->category->name}}
                             @else
                                 No category
                             @endif
                             </td>
-                            <td>{{$book->name}}</td>
-                            <td>{{$book->edition}}</td>
-                            <td>{{$book->author}}</td>
-                            <td>R{{$book->price}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->edition}}</td>
+                            <td>{{$item->author}}</td>
+                            <td>R{{$item->price}}</td>
                             <td>
-                            @if ($book->user)
-                                {{$book->user->name}}
+                            @if ($item->user)
+                                {{$item->user->name}}
                             @else
                                 No user
                             @endif
                             </td>
                             <td>
-                            @if ($book->user)
-                                {{$book->user->email}}
+                            @if ($item->user)
+                                {{$item->user->email}}
                             @else
                                 No user
                             @endif
                             </td>
-                            <td>{{$book->status == 1 ? 'Approved':'Pending'}}</td>
+                            <td>{{$item->status == 1 ? 'Approved':'Pending'}}</td>
                             <td>
-                                <a href="{{url('admin/books/'.$book->book_id.'/edit')}}" class="btn btn-sm btn-primary btn-txt">Edit</a>
-                                <a href="{{url('admin/books/'.$book->book_id.'/delete')}}" onclick="return confirm('Are you sure, you want to delete this data?')" class="btn btn-sm btn-danger btn-txt">Delete</a>
+                                <a href="{{url('admin/items/'.$item->item_id.'/edit')}}" class="btn btn-sm btn-primary btn-txt">Edit</a>
+                                <a href="{{url('admin/items/'.$item->item_id.'/delete')}}" onclick="return confirm('Are you sure, you want to delete this data?')" class="btn btn-sm btn-danger btn-txt">Delete</a>
                             </td>
                         </tr>
                         @empty
@@ -71,7 +71,7 @@
                     </tbody>
                 </table>
                 <div class="float-end">
-                    {{$books->links()}}
+                    {{$items->links()}}
                 </div>
             </div> 
         </div>

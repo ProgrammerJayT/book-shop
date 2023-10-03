@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookImage extends Model
+class ItemImage extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected $primaryKey = 'book_image_id';
+    protected $primaryKey = 'item_image_id';
 }

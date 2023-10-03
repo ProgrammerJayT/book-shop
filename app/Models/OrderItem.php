@@ -14,8 +14,8 @@ class OrderItem extends Model
 
     protected $primaryKey = 'order_item_id';
 
-    public function book()
+    public function item()
     {
-        return $this->belongsTo(Book::class, 'book_id');
+        return $this->belongsTo(Book::class, 'item_id');
     }
 }
